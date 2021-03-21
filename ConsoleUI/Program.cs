@@ -11,10 +11,14 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            UserManager userManager = new UserManager(new EfUserDal());
 
             //CarTest(carManager);
 
-            RentalAddTest(rentalManager);
+            //RentalAddTest(rentalManager);   
+
+            //CustomerTest(customerManager); 
         }
 
         private static void RentalAddTest(RentalManager rentalManager)
@@ -51,5 +55,23 @@ namespace ConsoleUI
                 Console.WriteLine(result.Message);
             }
         }
+
+        private static void CustomerTest(CustomerManager customerManager)
+        {
+            var result = customerManager.GetAll();
+            if (result.Success)
+            {
+                foreach (var customer in result.Data)
+                {
+                    Console.WriteLine("{0} - {1}", customer.CompanyName, customer.Id);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+         
     }
 }
